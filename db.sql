@@ -1,3 +1,11 @@
+-- 순차적으로 시퀀스 설정
+CREATE SEQUENCE transaction_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE
+    NOCYCLE;
+
+
 -- Users Table
 CREATE TABLE Users (
     user_id VARCHAR2(50) PRIMARY KEY,
@@ -27,7 +35,7 @@ CREATE TABLE Products (
 
 -- 거래 (Transactions) 테이블
 CREATE TABLE Transactions (
-    transaction_id NUMBER(10) PRIMARY KEY,
+    transaction_id NUMBER(10) DEFAULT transaction_seq.NEXTVAL PRIMARY KEY,
     user_id VARCHAR2(50) REFERENCES Users(user_id),
     shop_id NUMBER(10) REFERENCES Shops(shop_id),
     product_id NUMBER(10) REFERENCES Products(product_id),
